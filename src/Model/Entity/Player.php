@@ -27,5 +27,6 @@ class Player extends Entity
     protected array $_accessible = [
         'name' => true,
         'rounds' => true,
+        'green_card_date' => true,
     ];
 }

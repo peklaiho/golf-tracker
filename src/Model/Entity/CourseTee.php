@@ -32,6 +32,7 @@ class CourseTee extends Entity
     protected array $_accessible = [
         'course_id' => true,
         'name' => true,
+        'order' => true,
         'cr' => true,
         'slope' => true,
         'course' => true,

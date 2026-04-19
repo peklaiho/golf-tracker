@@ -46,9 +46,11 @@ class CoursesTable extends Table
 
         $this->hasMany('CourseHoles', [
             'foreignKey' => 'course_id',
+            'sort' => ['CourseHoles.number' => 'ASC'],
         ]);
         $this->hasMany('CourseTees', [
             'foreignKey' => 'course_id',
+            'sort' => ['CourseTees.order' => 'ASC'],
         ]);
     }
 

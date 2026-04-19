@@ -76,6 +76,11 @@ class CourseTeesTable extends Table
             ->notEmptyString('name');
 
         $validator
+            ->integer('order')
+            ->requirePresence('order', 'create')
+            ->notEmptyString('order');
+
+        $validator
             ->integer('cr')
             ->allowEmptyString('cr');
 

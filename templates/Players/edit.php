@@ -1,4 +1,4 @@
-<h1><?= $player->id ? 'Edit Player' : 'Add Player' ?></h1>
+<h1><?= $player->isNew() ? 'Add Player' : 'Edit Player' ?></h1>
 
 <?= $this->Form->create($player) ?>
 
