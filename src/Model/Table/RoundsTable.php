@@ -42,7 +42,7 @@ class RoundsTable extends Table
         parent::initialize($config);
 
         $this->setTable('rounds');
-        $this->setDisplayField('id');
+        $this->setDisplayField('tee_time');
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Players', [

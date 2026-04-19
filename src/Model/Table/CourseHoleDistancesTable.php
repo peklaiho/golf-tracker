@@ -41,7 +41,7 @@ class CourseHoleDistancesTable extends Table
         parent::initialize($config);
 
         $this->setTable('course_hole_distances');
-        $this->setDisplayField('id');
+        $this->setDisplayField('distance');
         $this->setPrimaryKey('id');
 
         $this->belongsTo('CourseHoles', [

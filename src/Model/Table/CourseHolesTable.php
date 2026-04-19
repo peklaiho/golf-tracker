@@ -42,7 +42,7 @@ class CourseHolesTable extends Table
         parent::initialize($config);
 
         $this->setTable('course_holes');
-        $this->setDisplayField('id');
+        $this->setDisplayField('number');
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Courses', [

@@ -41,7 +41,7 @@ class RoundHolesTable extends Table
         parent::initialize($config);
 
         $this->setTable('round_holes');
-        $this->setDisplayField('id');
+        $this->setDisplayField('strokes');
         $this->setPrimaryKey('id');
 
         $this->belongsTo('Rounds', [
