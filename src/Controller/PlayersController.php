@@ -54,6 +54,7 @@ class PlayersController extends AppController
             $this->Flash->error(__('The player could not be saved. Please, try again.'));
         }
         $this->set(compact('player'));
+        return $this->render('edit');
     }
 
     /**
