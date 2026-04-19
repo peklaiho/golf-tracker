@@ -23,9 +23,9 @@
             <tr>
                 <td><?= $hole->number ?></td>
                 <td><input name="course_holes[<?= $hole->id ?>][par]" type="number" min="3" max="5" value="<?= $hole->par ?>" tabindex="<?= $hole->number + 10 ?>" required /></td>
-                <td><input name="course_holes[<?= $hole->id ?>][hcp]" type="number" min="1" max="18" value="<?= $hole->hcp ?>" tabindex="<?= $hole->number + 100 ?>" required /></td>
+                <td><input name="course_holes[<?= $hole->id ?>][hcp]" type="number" min="1" max="18" value="<?= $hole->hcp ?>" tabindex="<?= $hole->number + 50 ?>" required /></td>
                 <?php foreach ($course->course_tees as $teeIndex => $tee): ?>
-                    <td><input name="distances[<?= $hole->id ?>][<?= $tee->id ?>]" type="number" min="0" max="600" value="<?= $distances[$hole->id][$tee->id] ?? 0 ?>" tabindex="<?= $hole->number + (1000 * ($teeIndex + 1)) ?>" required /></td>
+                    <td><input name="distances[<?= $hole->id ?>][<?= $tee->id ?>]" type="number" min="0" max="700" value="<?= $distances[$hole->id][$tee->id] ?? 0 ?>" tabindex="<?= $hole->number + (100 * ($teeIndex + 1)) ?>" required /></td>
                 <?php endforeach; ?>
             </tr>
         <?php endforeach; ?>

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Datasource\ConnectionManager;
+
 /**
  * Rounds Controller
  *
@@ -45,17 +47,27 @@ class RoundsController extends AppController
     public function add()
     {
         $round = $this->Rounds->newEmptyEntity();
+
         if ($this->request->is('post')) {
             $round = $this->Rounds->patchEntity($round, $this->request->getData());
-            if ($this->Rounds->save($round)) {
+            if ($this->Rounds->save($round) && $this->createHoles($round)) {
                 $this->Flash->success(__('The round has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'edit', $round->id]);
             }
             $this->Flash->error(__('The round could not be saved. Please, try again.'));
         }
-        $players = $this->Rounds->Players->find('list', limit: 200)->all();
-        $courseTees = $this->Rounds->CourseTees->find('list', limit: 200)->all();
+
+        $players = $this->Rounds->Players->find('list')->all();
+
+        $courses = $this->fetchTable('Courses')->find('all', order: ['Courses.name' => 'ASC'], contain: 'CourseTees')->all();
+        $courseTees = [];
+        foreach ($courses as $course) {
+            foreach ($course->course_tees as $tee) {
+                $courseTees[$tee->id] = $course->name . ' / ' . $tee->name;
+            }
+        }
+
         $this->set(compact('round', 'players', 'courseTees'));
     }
 
@@ -68,7 +80,7 @@ class RoundsController extends AppController
      */
     public function edit($id = null)
     {
-        $round = $this->Rounds->get($id, contain: []);
+        $round = $this->Rounds->get($id, contain: ['Players', 'CourseTees', 'CourseTees.Courses', 'RoundHoles', 'RoundHoles.CourseHoles']);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $round = $this->Rounds->patchEntity($round, $this->request->getData());
             if ($this->Rounds->save($round)) {
@@ -78,9 +90,7 @@ class RoundsController extends AppController
             }
             $this->Flash->error(__('The round could not be saved. Please, try again.'));
         }
-        $players = $this->Rounds->Players->find('list', limit: 200)->all();
-        $courseTees = $this->Rounds->CourseTees->find('list', limit: 200)->all();
-        $this->set(compact('round', 'players', 'courseTees'));
+        $this->set(compact('round'));
     }
 
     /**
@@ -101,5 +111,22 @@ class RoundsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    private function createHoles($round): bool
+    {
+        $connection = ConnectionManager::get('default');
+
+        $courseTee = $this->fetchTable('CourseTees')->get($round->course_tee_id, contain: ['Courses', 'Courses.CourseHoles']);
+
+        foreach ($courseTee->course->course_holes as $hole) {
+            $connection->insert('round_holes', [
+                'round_id' => $round->id,
+                'course_hole_id' => $hole->id,
+                'strokes' => 0,
+            ]);
+        }
+
+        return true;
     }
 }
