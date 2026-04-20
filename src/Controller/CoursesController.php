@@ -19,7 +19,7 @@ class CoursesController extends AppController
      */
     public function index()
     {
-        $query = $this->Courses->find('all', contain: ['CourseHoles', 'CourseTees']);
+        $query = $this->Courses->find('all', order: ['Courses.name' => 'ASC'], contain: ['CourseHoles', 'CourseTees', 'CourseTees.Rounds']);
         $courses = $this->paginate($query);
 
         // Calculate distances by tee

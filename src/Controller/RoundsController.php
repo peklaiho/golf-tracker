@@ -19,8 +19,7 @@ class RoundsController extends AppController
      */
     public function index()
     {
-        $query = $this->Rounds->find()
-            ->contain(['Players', 'CourseTees']);
+        $query = $this->Rounds->find('all', order: ['Rounds.tee_time' => 'DESC'], contain: ['Players', 'CourseTees', 'CourseTees.Courses', 'RoundHoles', 'RoundHoles.CourseHoles']);
         $rounds = $this->paginate($query);
 
         $this->set(compact('rounds'));
@@ -35,7 +34,7 @@ class RoundsController extends AppController
      */
     public function view($id = null)
     {
-        $round = $this->Rounds->get($id, contain: ['Players', 'CourseTees', 'RoundHoles']);
+        $round = $this->Rounds->get($id, contain: ['Players', 'CourseTees', 'CourseTees.Courses', 'RoundHoles', 'RoundHoles.CourseHoles']);
         $this->set(compact('round'));
     }
 
@@ -82,8 +81,11 @@ class RoundsController extends AppController
     {
         $round = $this->Rounds->get($id, contain: ['Players', 'CourseTees', 'CourseTees.Courses', 'RoundHoles', 'RoundHoles.CourseHoles']);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $round = $this->Rounds->patchEntity($round, $this->request->getData());
-            if ($this->Rounds->save($round)) {
+            $data = $this->request->getData();
+            $this->Rounds->patchEntity($round, [
+                'tee_time' => $data['tee_time'],
+            ]);
+            if ($this->Rounds->save($round) && $this->saveHoles($data['round_holes'])) {
                 $this->Flash->success(__('The round has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -128,5 +130,34 @@ class RoundsController extends AppController
         }
 
         return true;
+    }
+
+    private function saveHoles($holes): bool
+    {
+        $connection = ConnectionManager::get('default');
+
+        foreach ($holes as $id => $data) {
+            $connection->update('round_holes', [
+                'strokes' => $this->parseValue($data['strokes'], 0),
+                'fairway_hit' => $this->parseValue($data['fairway_hit']),
+                'green_in_reg' => $this->parseValue($data['green_in_reg']),
+                'putts' => $this->parseValue($data['putts']),
+            ], ['id' => $id]);
+        }
+
+        return true;
+    }
+
+    private function parseValue($value, $default = null)
+    {
+        if ($value === '' || $value === 'null') {
+            return null;
+        }
+
+        if (is_numeric($value)) {
+            return intval($value);
+        }
+
+        return $default;
     }
 }

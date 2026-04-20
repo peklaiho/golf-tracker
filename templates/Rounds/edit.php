@@ -8,8 +8,10 @@
 <div>
     Course / Tee: <?= $round->course_tee->course->name ?> / <?= $round->course_tee->name ?>
 </div>
+
 <div>
-    Tee time: <?= $round->tee_time->format('Y-m-d H:i') ?>
+    <?= $this->Form->label('tee_time', 'Tee time') ?>
+    <?= $this->Form->dateTime('tee_time', ['value' => $round->tee_time]) ?>
 </div>
 
 <table>
@@ -26,7 +28,7 @@
     <tbody>
         <?php foreach ($round->round_holes as $hole): ?>
             <tr>
-                <td><?= $hole->course_hole->number ?></td>
+                <th><?= $hole->course_hole->number ?></th>
                 <td><?= $hole->course_hole->par ?></td>
                 <td><input name="round_holes[<?= $hole->id ?>][strokes]" type="number" min="1" max="20" value="<?= $hole->strokes ?>" tabindex="<?= $hole->course_hole->number + 10 ?>" required /></td>
                 <td>

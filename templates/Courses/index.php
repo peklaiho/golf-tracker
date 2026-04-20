@@ -3,7 +3,6 @@
 <table>
     <thead>
         <tr>
-            <th>Id</th>
             <th>Name</th>
             <th>Par</th>
             <th>Rounds</th>
@@ -14,10 +13,9 @@
     <tbody>
         <?php foreach ($courses as $course): ?>
         <tr>
-            <td><?= $course->id ?></td>
             <td><?= $this->Html->link($course->name, ['action' => 'view', $course->id]) ?></td>
             <td><?= array_sum(array_map(fn ($a) => $a->par, $course->course_holes)) ?></td>
-            <td>0</td>
+            <td><?= array_sum(array_map(fn ($a) => count($a->rounds), $course->course_tees)) ?></td>
             <td>
                 <?php foreach ($course->course_tees as $tee): ?>
                 <div>
