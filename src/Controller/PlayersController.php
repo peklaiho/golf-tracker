@@ -17,7 +17,7 @@ class PlayersController extends AppController
      */
     public function index()
     {
-        $query = $this->Players->find();
+        $query = $this->Players->find('all', order: ['Players.name' => 'ASC'], contain: ['Rounds']);
         $players = $this->paginate($query);
 
         $this->set(compact('players'));

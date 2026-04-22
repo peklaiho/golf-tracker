@@ -32,6 +32,7 @@ class Round extends Entity
         'player_id' => true,
         'course_tee_id' => true,
         'tee_time' => true,
+        'note' => true,
         'player' => true,
         'course_tee' => true,
         'round_holes' => true,

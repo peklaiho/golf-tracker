@@ -30,4 +30,4 @@
     </tbody>
 </table>
 
-<?= $this->Html->link('Add Course', ['action' => 'add'], ['class' => 'button']) ?>
+<?= $this->Html->link('Add Course', ['action' => 'add']) ?>

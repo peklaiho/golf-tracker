@@ -33,9 +33,9 @@
 </table>
 
 <div>
-    <?= $this->Html->link('Add Tee', ['action' => 'addTee', $course->id], ['class' => 'button']) ?>
+    <?= $this->Html->link('Add Tee', ['action' => 'addTee', $course->id]) ?>
     <?= $this->Form->submit('Save') ?>
-    <?= $this->Html->link('Back', ['action' => 'index'], ['class' => 'button']) ?>
+    <?= $this->Html->link('Back', ['action' => 'index']) ?>
 </div>
 
 <?= $this->Form->end(); ?>

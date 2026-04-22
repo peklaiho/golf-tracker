@@ -1,16 +1,24 @@
-<h1>View Round</h1>
+<h1><?= $round->course_tee->course->name ?></h1>
 
 <?= $this->Form->create($round) ?>
 
 <div>
+    Date: <?= $round->tee_time->format('Y-m-d H:i') ?>
+</div>
+
+<div>
     Player: <?= $round->player->name ?>
 </div>
+
 <div>
-    Course / Tee: <?= $round->course_tee->course->name ?> / <?= $round->course_tee->name ?>
+    Tee: <?= $round->course_tee->name ?>
 </div>
+
+<?php if ($round->note): ?>
 <div>
-    Tee time: <?= $round->tee_time->format('Y-m-d H:i') ?>
+    Note: <?= $round->note ?>
 </div>
+<?php endif ?>
 
 <table>
     <thead>
@@ -48,7 +56,7 @@
 </table>
 
 <div>
-    <?= $this->Html->link('Back', ['action' => 'index'], ['class' => 'button']) ?>
+    <?= $this->Html->link('Back', ['action' => 'index']) ?>
 </div>
 
 <?= $this->Form->end(); ?>

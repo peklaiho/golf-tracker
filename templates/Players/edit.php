@@ -9,6 +9,7 @@
 
 <div>
     <?= $this->Form->submit('Save') ?>
+    <?= $this->Html->link('Back', ['action' => 'index']) ?>
 </div>
 
 <?= $this->Form->end(); ?>

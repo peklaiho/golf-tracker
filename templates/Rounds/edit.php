@@ -14,6 +14,11 @@
     <?= $this->Form->dateTime('tee_time', ['value' => $round->tee_time]) ?>
 </div>
 
+<div>
+    <?= $this->Form->label('note') ?>
+    <?= $this->Form->textarea('note') ?>
+</div>
+
 <table>
     <thead>
         <tr>
@@ -30,7 +35,7 @@
             <tr>
                 <th><?= $hole->course_hole->number ?></th>
                 <td><?= $hole->course_hole->par ?></td>
-                <td><input name="round_holes[<?= $hole->id ?>][strokes]" type="number" min="1" max="20" value="<?= $hole->strokes ?>" tabindex="<?= $hole->course_hole->number + 10 ?>" required /></td>
+                <td><input name="round_holes[<?= $hole->id ?>][strokes]" type="number" min="0" max="20" value="<?= $hole->strokes ?>" tabindex="<?= $hole->course_hole->number + 10 ?>" required /></td>
                 <td>
                     <label style="display: inline">
                         <input name="round_holes[<?= $hole->id ?>][fairway_hit]" type="radio" value="1" tabindex="<?= $hole->course_hole->number + 50 ?>" <?= ($hole->fairway_hit === 1) ? 'checked' : '' ?> required />
@@ -69,7 +74,7 @@
 
 <div>
     <?= $this->Form->submit('Save') ?>
-    <?= $this->Html->link('Back', ['action' => 'index'], ['class' => 'button']) ?>
+    <?= $this->Html->link('Back', ['action' => 'index']) ?>
 </div>
 
 <?= $this->Form->end(); ?>

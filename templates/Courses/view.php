@@ -47,4 +47,4 @@
     </tfoot>
 </table>
 
-<?= $this->Html->link('Back', ['action' => 'index'], ['class' => 'button']) ?>
+<?= $this->Html->link('Back', ['action' => 'index']) ?>

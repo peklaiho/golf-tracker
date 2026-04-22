@@ -9,6 +9,7 @@
             <th>Tee</th>
             <th>Par</th>
             <th>Strokes</th>
+            <th>Note</th>
             <th></th>
         </tr>
     </thead>
@@ -21,10 +22,11 @@
             <td><?= $round->course_tee->name ?></td>
             <td><?= array_sum(array_column(array_column($round->round_holes, 'course_hole'), 'par')) ?></td>
             <td><?= array_sum(array_column($round->round_holes, 'strokes')) ?></td>
+            <td><?= $round->note ?></td>
             <td><?= $this->Html->link('edit', ['action' => 'edit', $round->id]) ?></td>
         </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
 
-<?= $this->Html->link('Add Round', ['action' => 'add'], ['class' => 'button']) ?>
+<?= $this->Html->link('Add Round', ['action' => 'add']) ?>

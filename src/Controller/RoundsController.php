@@ -82,8 +82,10 @@ class RoundsController extends AppController
         $round = $this->Rounds->get($id, contain: ['Players', 'CourseTees', 'CourseTees.Courses', 'RoundHoles', 'RoundHoles.CourseHoles']);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $data = $this->request->getData();
+            $note = trim($data['note']);
             $this->Rounds->patchEntity($round, [
                 'tee_time' => $data['tee_time'],
+                'note' => $note ? $note : null,
             ]);
             if ($this->Rounds->save($round) && $this->saveHoles($data['round_holes'])) {
                 $this->Flash->success(__('The round has been saved.'));
