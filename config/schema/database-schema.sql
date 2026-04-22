@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 19, 2026 at 08:20 AM
+-- Generation Time: Apr 22, 2026 at 05:05 PM
 -- Server version: 12.2.2-MariaDB
 -- PHP Version: 8.5.5
 
@@ -69,6 +69,7 @@ CREATE TABLE `course_tees` (
   `id` int(11) NOT NULL,
   `course_id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL,
+  `order` int(11) NOT NULL DEFAULT 0,
   `cr` int(11) DEFAULT NULL,
   `slope` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -81,7 +82,8 @@ CREATE TABLE `course_tees` (
 
 CREATE TABLE `players` (
   `id` int(11) NOT NULL,
-  `name` varchar(128) NOT NULL
+  `name` varchar(128) NOT NULL,
+  `green_card_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
