@@ -18,11 +18,21 @@
             <td><?= array_sum(array_map(fn ($a) => count($a->rounds), $course->course_tees)) ?></td>
             <td>
                 <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th class="has-text-right">Distance</th>
+                            <th class="has-text-right">CR</th>
+                            <th class="has-text-right">Slope</th>
+                        </tr>
+                    </thead>
                     <tbody>
                         <?php foreach ($course->course_tees as $tee): ?>
                             <tr>
                                 <th><?= $tee->name ?></th>
                                 <td class="has-text-right"><?= $distances[$tee->id] ?? '' ?></td>
+                                <td class="has-text-right"><?= $tee->cr ?></td>
+                                <td class="has-text-right"><?= $tee->slope ?></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -34,4 +44,15 @@
     </tbody>
 </table>
 
-<?= $this->Html->link('Add Course', ['action' => 'add'], ['class' => 'button is-primary']) ?>
+<div class="level">
+    <div class="level-left">
+        <?= $this->Html->link('Add Course', ['action' => 'add'], ['class' => 'button is-primary']) ?>
+    </div>
+    <div class="level-right">
+        <?= $this->Paginator->first('First') ?>
+        <?= $this->Paginator->prev('<<') ?>
+        <?= $this->Paginator->numbers() ?>
+        <?= $this->Paginator->next('>>') ?>
+        <?= $this->Paginator->last('Last') ?>
+    </div>
+</div>

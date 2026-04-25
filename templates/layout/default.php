@@ -13,7 +13,7 @@
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <header class="container mb-4 mt-4">
+    <header class="container mb-5 mt-5">
         <nav class="level">
             <ul class="level-left">
                 <li class="title">GolfTracker</li>
@@ -25,11 +25,11 @@
             </ul>
         </nav>
     </header>
-    <main class="container">
+    <main class="container mb-5">
         <?= $this->Flash->render() ?>
         <?= $this->fetch('content') ?>
     </main>
-    <footer class="container">
+    <footer class="container mb-5">
     </footer>
 </body>
 </html>

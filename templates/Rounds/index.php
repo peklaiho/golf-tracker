@@ -7,6 +7,7 @@
             <th>Player</th>
             <th>Course</th>
             <th>Tee</th>
+            <th>Holes</th>
             <th>Par</th>
             <th>Strokes</th>
             <th>Note</th>
@@ -20,6 +21,7 @@
             <td><?= $round->player->name ?></td>
             <td><?= $round->course_tee->course->name ?></td>
             <td><?= $round->course_tee->name ?></td>
+            <td><?= count($round->round_holes) ?>
             <td><?= array_sum(array_column(array_column($round->round_holes, 'course_hole'), 'par')) ?></td>
             <td><?= array_sum(array_column($round->round_holes, 'strokes')) ?></td>
             <td><?= $round->note ?></td>
@@ -29,4 +31,15 @@
     </tbody>
 </table>
 
-<?= $this->Html->link('Add Round', ['action' => 'add'], ['class' => 'button is-primary']) ?>
+<div class="level">
+    <div class="level-left">
+        <?= $this->Html->link('Add Round', ['action' => 'add'], ['class' => 'button is-primary']) ?>
+    </div>
+    <div class="level-right">
+        <?= $this->Paginator->first('First') ?>
+        <?= $this->Paginator->prev('<<') ?>
+        <?= $this->Paginator->numbers() ?>
+        <?= $this->Paginator->next('>>') ?>
+        <?= $this->Paginator->last('Last') ?>
+    </div>
+</div>
