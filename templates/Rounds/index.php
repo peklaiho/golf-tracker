@@ -1,6 +1,6 @@
-<h1>Rounds</h1>
+<h1 class="title">Rounds</h1>
 
-<table>
+<table class="table is-fullwidth">
     <thead>
         <tr>
             <th>Date</th>
@@ -23,10 +23,10 @@
             <td><?= array_sum(array_column(array_column($round->round_holes, 'course_hole'), 'par')) ?></td>
             <td><?= array_sum(array_column($round->round_holes, 'strokes')) ?></td>
             <td><?= $round->note ?></td>
-            <td><?= $this->Html->link('edit', ['action' => 'edit', $round->id]) ?></td>
+            <td><?= $this->Html->link('Edit', ['action' => 'edit', $round->id], ['class' => 'button is-link is-small']) ?></td>
         </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
 
-<?= $this->Html->link('Add Round', ['action' => 'add']) ?>
+<?= $this->Html->link('Add Round', ['action' => 'add'], ['class' => 'button is-primary']) ?>

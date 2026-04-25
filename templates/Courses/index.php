@@ -1,6 +1,6 @@
-<h1>Courses</h1>
+<h1 class="title">Courses</h1>
 
-<table>
+<table class="table is-fullwidth">
     <thead>
         <tr>
             <th>Name</th>
@@ -17,17 +17,21 @@
             <td><?= array_sum(array_map(fn ($a) => $a->par, $course->course_holes)) ?></td>
             <td><?= array_sum(array_map(fn ($a) => count($a->rounds), $course->course_tees)) ?></td>
             <td>
-                <?php foreach ($course->course_tees as $tee): ?>
-                <div>
-                    <span><?= $tee->name ?></span>:
-                    <span><?= $distances[$tee->id] ?? '' ?></span>
-                </div>
-                <?php endforeach; ?>
+                <table class="table">
+                    <tbody>
+                        <?php foreach ($course->course_tees as $tee): ?>
+                            <tr>
+                                <th><?= $tee->name ?></th>
+                                <td class="has-text-right"><?= $distances[$tee->id] ?? '' ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
             </td>
-            <td><?= $this->Html->link('edit', ['action' => 'edit', $course->id]) ?></td>
+            <td><?= $this->Html->link('Edit', ['action' => 'edit', $course->id], ['class' => 'button is-link is-small']) ?></td>
         </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
 
-<?= $this->Html->link('Add Course', ['action' => 'add']) ?>
+<?= $this->Html->link('Add Course', ['action' => 'add'], ['class' => 'button is-primary']) ?>

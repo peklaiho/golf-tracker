@@ -6,31 +6,31 @@
     <title>GolfTracker: <?= $this->fetch('title') ?></title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css(['pico.classless.orange.css']) ?>
+    <?= $this->Html->css(['bulma']) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li>GolfTracker</li>
+    <header class="container mb-4 mt-4">
+        <nav class="level">
+            <ul class="level-left">
+                <li class="title">GolfTracker</li>
             </ul>
-            <ul>
-                <li><?= $this->Html->link('Rounds', ['controller' => 'Rounds', 'action' => 'index']) ?></li>
-                <li><?= $this->Html->link('Courses', ['controller' => 'Courses', 'action' => 'index']) ?></li>
-                <li><?= $this->Html->link('Players', ['controller' => 'Players', 'action' => 'index']) ?></li>
+            <ul class="level-right">
+                <li><?= $this->Html->link('Rounds', ['controller' => 'Rounds', 'action' => 'index'], ['class' => 'button is-rounded']) ?></li>
+                <li><?= $this->Html->link('Courses', ['controller' => 'Courses', 'action' => 'index'], ['class' => 'button is-rounded']) ?></li>
+                <li><?= $this->Html->link('Players', ['controller' => 'Players', 'action' => 'index'], ['class' => 'button is-rounded']) ?></li>
             </ul>
         </nav>
     </header>
-    <main>
+    <main class="container">
         <?= $this->Flash->render() ?>
         <?= $this->fetch('content') ?>
         <?= $this->Html->link(__('Back'), 'javascript:history.back()') ?>
     </main>
-    <footer>
+    <footer class="container">
     </footer>
 </body>
 </html>

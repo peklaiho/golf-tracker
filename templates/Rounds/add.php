@@ -1,25 +1,35 @@
-<h1>Add Round</h1>
+<h1 class="title">Add Round</h1>
 
 <?= $this->Form->create($round) ?>
 
-<div>
-    <?= $this->Form->label('player_id', 'Player') ?>
-    <?= $this->Form->select('player_id', $players) ?>
+<div class="field">
+    <?= $this->Form->label('player_id', 'Player', ['class' => 'label']) ?>
+    <div class="control">
+        <div class="select">
+            <?= $this->Form->select('player_id', $players) ?>
+        </div>
+    </div>
 </div>
 
-<div>
-    <?= $this->Form->label('course_tee_id', 'Course / Tee') ?>
-    <?= $this->Form->select('course_tee_id', $courseTees) ?>
+<div class="field">
+    <?= $this->Form->label('course_tee_id', 'Course / Tee', ['class' => 'label']) ?>
+    <div class="control">
+        <div class="select">
+            <?= $this->Form->select('course_tee_id', $courseTees) ?>
+        </div>
+    </div>
 </div>
 
-<div>
-    <?= $this->Form->label('tee_time', 'Tee time') ?>
-    <?= $this->Form->dateTime('tee_time', ['value' => date('Y-m-d 12:00:00')]) ?>
+<div class="field">
+    <?= $this->Form->label('tee_time', 'Tee time', ['class' => 'label']) ?>
+    <div class="control">
+        <?= $this->Form->dateTime('tee_time', ['value' => date('Y-m-d 12:00:00'), 'class' => 'input']) ?>
+    </div>
 </div>
 
-<div>
-    <?= $this->Form->submit('Save') ?>
-    <?= $this->Html->link('Back', ['action' => 'index']) ?>
+<div class="field">
+    <?= $this->Form->button('Save', ['type' => 'submit', 'class' => 'button is-primary mr-2']) ?>
+    <?= $this->Html->link('Back', ['action' => 'index'], ['class' => 'button is-link']) ?>
 </div>
 
 <?= $this->Form->end(); ?>

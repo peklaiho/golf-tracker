@@ -1,6 +1,6 @@
-<h1>Players</h1>
+<h1 class="title">Players</h1>
 
-<table>
+<table class="table is-fullwidth">
     <thead>
         <tr>
             <th>Name</th>
@@ -13,10 +13,10 @@
         <tr>
             <td><?= $player->name ?></td>
             <td><?= count($player->rounds) ?></td>
-            <td><?= $this->Html->link('edit', ['action' => 'edit', $player->id]) ?></td>
+            <td><?= $this->Html->link('Edit', ['action' => 'edit', $player->id], ['class' => 'button is-link is-small']) ?></td>
         </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
 
-<?= $this->Html->link('Add Player', ['action' => 'add']) ?>
+<?= $this->Html->link('Add Player', ['action' => 'add'], ['class' => 'button is-primary']) ?>

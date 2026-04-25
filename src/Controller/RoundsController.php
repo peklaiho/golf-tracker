@@ -19,7 +19,7 @@ class RoundsController extends AppController
      */
     public function index()
     {
-        $query = $this->Rounds->find('all', order: ['Rounds.tee_time' => 'DESC'], contain: ['Players', 'CourseTees', 'CourseTees.Courses', 'RoundHoles', 'RoundHoles.CourseHoles']);
+        $query = $this->Rounds->find('all', order: ['Rounds.tee_time' => 'DESC', 'Rounds.id' => 'DESC'], contain: ['Players', 'CourseTees', 'CourseTees.Courses', 'RoundHoles', 'RoundHoles.CourseHoles']);
         $rounds = $this->paginate($query);
 
         $this->set(compact('rounds'));
