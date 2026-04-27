@@ -28,6 +28,13 @@
 </div>
 
 <div class="field">
+    <label for="number_of_holes" class="label">Played holes</label>
+    <div class="control">
+        <input name="number_of_holes" class="input" type="number" min="1" max="18" value="18" />
+    </div>
+</div>
+
+<div class="field">
     <?= $this->Form->button('Save', ['type' => 'submit', 'class' => 'button is-primary mr-2']) ?>
     <?= $this->Html->link('Back', ['action' => 'index'], ['class' => 'button is-link']) ?>
 </div>

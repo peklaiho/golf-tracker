@@ -48,8 +48,11 @@ class RoundsController extends AppController
         $round = $this->Rounds->newEmptyEntity();
 
         if ($this->request->is('post')) {
-            $round = $this->Rounds->patchEntity($round, $this->request->getData());
-            if ($this->Rounds->save($round) && $this->createHoles($round)) {
+            $data = $this->request->getData();
+            $numberOfHoles = $data['number_of_holes'];
+            unset($data['number_of_holes']);
+            $round = $this->Rounds->patchEntity($round, $data);
+            if ($this->Rounds->save($round) && $this->createHoles($round, $numberOfHoles)) {
                 $this->Flash->success(__('The round has been saved.'));
 
                 return $this->redirect(['action' => 'edit', $round->id]);
@@ -117,18 +120,20 @@ class RoundsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    private function createHoles($round): bool
+    private function createHoles($round, $numberOfHoles): bool
     {
         $connection = ConnectionManager::get('default');
 
         $courseTee = $this->fetchTable('CourseTees')->get($round->course_tee_id, contain: ['Courses', 'Courses.CourseHoles']);
 
         foreach ($courseTee->course->course_holes as $hole) {
-            $connection->insert('round_holes', [
-                'round_id' => $round->id,
-                'course_hole_id' => $hole->id,
-                'strokes' => 0,
-            ]);
+            if ($hole->number <= $numberOfHoles) {
+                $connection->insert('round_holes', [
+                    'round_id' => $round->id,
+                    'course_hole_id' => $hole->id,
+                    'strokes' => 0,
+                ]);
+            }
         }
 
         return true;
