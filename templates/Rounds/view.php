@@ -41,7 +41,7 @@
             <tr>
                 <th><?= $hole->course_hole->number ?></th>
                 <td class="has-text-right"><?= $hole->course_hole->par ?></td>
-                <td class="has-text-right"><?= $hole->strokes ?></td>
+                <td class="has-text-right<?= ($hole->strokes < $hole->course_hole->par) ? ' has-text-danger has-text-weight-bold' : (($hole->strokes == $hole->course_hole->par) ? ' has-text-success has-text-weight-bold' : '') ?>"><?= $hole->strokes ?></td>
                 <td class="has-text-right"><?= match ($hole->fairway_hit) { 0 => 'No', 1 => 'Yes', default => '' } ?></td>
                 <td class="has-text-right"><?= match ($hole->green_in_reg) { 0 => 'No', 1 => 'Yes', default => '' } ?></td>
                 <td class="has-text-right"><?= $hole->putts ?></td>
